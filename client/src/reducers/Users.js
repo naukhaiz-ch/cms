@@ -1,9 +1,9 @@
-import { FETCH_ALL } from '../constants/actionTypes'
+import { FETCH_ALL_USERS } from '../constants/actionTypes'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (users = [], action) => {
     switch (action.type) {
-        case FETCH_ALL:
+        case FETCH_ALL_USERS:
             return action.payload
         default:
             return users

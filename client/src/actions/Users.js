@@ -1,4 +1,4 @@
-import { FETCH_ALL } from '../constants/actionTypes'
+import { FETCH_ALL_USERS } from '../constants/actionTypes'
 import * as api from '../api/Index'
 
 // Action Creators
@@ -6,7 +6,7 @@ export const getUsers = (userRole) => async (dispatch) => {
     try {
         const { data } = await api.fetchUsers(userRole)
         dispatch({
-            type: FETCH_ALL,
+            type: FETCH_ALL_USERS,
             payload: data
         })
     } catch (error) {

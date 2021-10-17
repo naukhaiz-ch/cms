@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE } from '../constants/actionTypes';
+import { FETCH_ALL_APPOINTMENTS, CREATE_APPOINTMENT, UPDATE_APPOINTMENT } from '../constants/actionTypes';
 import * as api from '../api/Index';
 
 
@@ -6,7 +6,7 @@ export const createAppointment = (appointmentData) => async (dispatch) => {
     try {
         const { data } = await api.createAppointment(appointmentData)
         dispatch({
-            type: CREATE,
+            type: CREATE_APPOINTMENT,
             payload: data
         })
     } catch (error) {
@@ -18,7 +18,7 @@ export const getAppointments = () => async (dispatch) => {
     try {
         const { data } = await api.fetchAppointments()
         dispatch({
-            type: FETCH_ALL,
+            type: FETCH_ALL_APPOINTMENTS,
             payload: data
         })
     } catch (error) {
@@ -30,7 +30,7 @@ export const changeAppointmentStatus = (id) => async (dispatch) => {
     try {
         const { data } = await api.changeAppointmentStatus(id)
         dispatch({
-            type: UPDATE,
+            type: UPDATE_APPOINTMENT,
             payload: data
         })
     } catch (error) {

@@ -17,11 +17,9 @@ const Patient = () => {
 
     useEffect(() => {
         dispatch(getAppointments())
-    }, dispatch)
-
-    useEffect(() => {
         dispatch(getPrescriptions())
     }, dispatch)
+
 
     return (
         <>
@@ -76,27 +74,25 @@ const Patient = () => {
                                             <li class="nav-item">
                                                 <a
                                                     class="nav-link"
-                                                    href="#pat_medical_records"
+                                                    href="#pat_billing"
                                                     data-toggle="tab"
-                                                ><span class="med-records">Medical Records</span></a
+                                                >Qoutations</a
                                                 >
                                             </li>
                                             <li class="nav-item">
                                                 <a
                                                     class="nav-link"
-                                                    href="#pat_billing"
+                                                    href="#pat_medical_records"
                                                     data-toggle="tab"
-                                                >Qoutations</a
+                                                ><span class="med-records">Medical Records</span></a
                                                 >
                                             </li>
                                         </ul>
                                     </nav>
 
                                     <div class="tab-content pt-0">
-                                        <div
-                                            id="pat_appointments"
-                                            class="tab-pane fade show active"
-                                        >
+                                        <div id="pat_appointments"
+                                            class="tab-pane fade show active">
                                             <div class="card card-table mb-0">
                                                 <div class="card-body">
                                                     <div class="table-responsive">
@@ -111,39 +107,40 @@ const Patient = () => {
                                                                 </tr>
                                                             </thead>
                                                             {appointments.map((appointment) => (
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <h2 class="table-avatar">
-                                                                                <Link
-                                                                                    to="/doc-profile"
-                                                                                    class="avatar avatar-sm mr-2"
-                                                                                >
-                                                                                    <img
-                                                                                        class="avatar-img rounded-circle"
-                                                                                        src="assets/img/doctors/doctor-thumb-01.jpg"
-                                                                                        alt="User pic"
-                                                                                    />
-                                                                                </Link>
-                                                                                <Link to="/doc-profile">
-                                                                                    {appointment.doctorId}
-                                                                                </Link>
-                                                                            </h2>
-                                                                        </td>
-                                                                        <td>{appointment.appointmentTime}</td>
-                                                                        <td>{appointment.appointmentDate}</td>
-                                                                        <td>{appointment.totalBill}</td>
-                                                                        <td>{appointment.appointmentStatus}</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            ))}
+                                                                appointment.patientId === localUser?.result?._id && (
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <h2 class="table-avatar">
+                                                                                    <Link
+                                                                                        to="/doc-profile"
+                                                                                        class="avatar avatar-sm mr-2"
+                                                                                    >
+                                                                                        <img
+                                                                                            class="avatar-img rounded-circle"
+                                                                                            src="assets/img/doctors/doctor-thumb-01.jpg"
+                                                                                            alt="User pic"
+                                                                                        />
+                                                                                    </Link>
+                                                                                    <Link to="/doc-profile">
+                                                                                        {appointment.doctorId}
+                                                                                    </Link>
+                                                                                </h2>
+                                                                            </td>
+                                                                            <td>{appointment.appointmentTime}</td>
+                                                                            <td>{appointment.appointmentDate}</td>
+                                                                            <td>{appointment.totalBill}</td>
+                                                                            <td>{appointment.appointmentStatus}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                )))}
                                                         </table>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane fade" id="pat_prescriptions">
+                                        <div id="pat_prescriptions" class="tab-pane fade">
                                             <div class="card card-table mb-0">
                                                 <div class="card-body">
                                                     <div class="table-responsive">
@@ -179,6 +176,48 @@ const Patient = () => {
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="pat_billing" class="tab-pane fade">
+                                            <div class="card card-table mb-0">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover table-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Product</th>
+                                                                    <th>Pharmacy Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Status</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            {prescriptions.map((prescription) => (
+                                                                prescription.patientId === localUser?.result?._id && (
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <h2 class="table-avatar">
+                                                                                    <p href=""
+                                                                                        class="avatar avatar-sm mr-2">
+                                                                                        <img
+                                                                                            class="avatar-img"
+                                                                                            src={prescription.selectedFile}
+                                                                                            alt="User pic"
+                                                                                        />
+                                                                                    </p><a href={prescription.selectedFile} download class="fas fa-download"></a>
+                                                                                </h2>
+                                                                            </td>
+                                                                            <td>{prescription.pharmacyId}</td>
+                                                                            <td>{prescription.quantity}</td>
+                                                                            <td>{prescription.prescriptionStatus}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                )))}
                                                         </table>
                                                     </div>
                                                 </div>
@@ -228,47 +267,6 @@ const Patient = () => {
 
                                                                 </tr>
                                                             </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div id="pat_billing" class="tab-pane fade">
-                                            <div class="card card-table mb-0">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover table-center mb-0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Product</th>
-                                                                    <th>Pharmacy Name</th>
-                                                                    <th>Quantity</th>
-                                                                    <th>Status</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            {prescriptions.map((prescription) => (
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <h2 class="table-avatar">
-                                                                                <p href=""
-                                                                                    class="avatar avatar-sm mr-2">
-                                                                                    <img
-                                                                                        class="avatar-img"
-                                                                                        src={prescription.selectedFile}
-                                                                                        alt="User pic"
-                                                                                    />
-                                                                                </p><a href={prescription.selectedFile} download class="fas fa-download"></a>
-                                                                            </h2>
-                                                                        </td>
-                                                                        <td>{prescription.patientId}</td>
-                                                                        <td>{prescription.quantity}</td>
-                                                                        <td>{prescription.prescriptionStatus}</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            ))}
                                                         </table>
                                                     </div>
                                                 </div>
