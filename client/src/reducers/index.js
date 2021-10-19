@@ -4,5 +4,6 @@ import users from './Users'
 import auth from './Auth'
 import appointments from './Appointments'
 import prescriptions from './Prescription'
+import medicines from './Medicine'
 
-export default combineReducers({ auth, users, appointments, prescriptions })
+export default combineReducers({ auth, users, appointments, prescriptions, medicines })

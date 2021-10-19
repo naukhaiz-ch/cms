@@ -22,3 +22,6 @@ export const changeAppointmentStatus = (id) => API.patch(`/appointments/${id}/ch
 export const createPrescription = (newPrescription) => API.post('/prescriptions', newPrescription)
 export const fetchPrescriptions = () => API.get('/prescriptions')
 export const changePrescriptionStatus = (id) => API.patch(`/prescriptions/${id}/changePrescriptionStatus `)
+
+export const createMedicine = (newMedicine) => API.post('/medicines', newMedicine)
+export const fetchMedicines = () => API.get('/medicines')

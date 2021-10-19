@@ -19,6 +19,7 @@ import Aboutus from './views/Aboutus';
 import Contactus from './views/Contactus';
 import PaymentComponent from './views/components/payment/paymentComponent';
 import PharmacyOrders from './views/PharmacyOrders';
+import VideoCall from './views/VideoCall';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/lab-profile" exact component={() => <LabProfile />} />
           <Route path="/pharmacy-profile" exact component={() => <PharmacyProfile />} />
           <Route path="/pharmacy-orders" exact component={() => <PharmacyOrders />} />
+          <Route path="/video-call" exact component={() => <VideoCall />} />
           <Route path="/checkout">
             <PaymentComponent
               keys={{

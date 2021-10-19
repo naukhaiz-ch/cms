@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../actions/Users';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
 import { createPrescription } from '../actions/Prescription'
 
 
