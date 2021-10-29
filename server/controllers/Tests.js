@@ -32,9 +32,9 @@ export const createTest = async (req, res) => {
 export const changeTestStatus = async (req, res) => {
     const { id } = req.params
 
-    res.userId
+    // res.userId
 
-    if (!req.userId) return res.JSON({ message: 'Unauthenticated' })
+    // if (!req.userId) return res.JSON({ message: 'Unauthenticated' })
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No test with id: ${id}`)
 
@@ -49,6 +49,19 @@ export const changeTestStatus = async (req, res) => {
     const updatedTest = await Test.findByIdAndUpdate(id, test, { new: true })
 
     res.json(updatedTest)
+}
+
+export const updateTest = async (req, res) => {
+    const { id } = req.params
+    const { selectedFile } = req.body
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No test with id: ${id}`)
+
+    const updatedTest = { selectedFile, _id: id }
+
+    await Test.findByIdAndUpdate(id, updatedTest, { new: true })
+
+    res.json(Test)
 }
 
 

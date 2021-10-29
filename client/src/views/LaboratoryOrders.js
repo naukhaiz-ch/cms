@@ -1,20 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import FileBase from 'react-file-base64'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Sidebar from './components/pharmDash/Sidebar';
-import { getPrescriptions, changePrescriptionStatus } from '../actions/Prescription';
+import { getTests, updateTest, changeTestStatus } from '../actions/Test';
 
-const PharmacyOrders = () => {
+const LaboratoryOrders = () => {
     const dispatch = useDispatch()
     const localUser = JSON.parse(localStorage.getItem('profile'))
-    const prescriptions = useSelector((state) => state.prescriptions)
+    const tests = useSelector((state) => state.tests)
     const id = localUser?.result?._id
 
     useEffect(() => {
-        dispatch(getPrescriptions())
+        dispatch(getTests())
     }, dispatch)
+
+    const [labReport, setLabReport] = useState({
+        selectedFile: ''
+    })
 
     return (
         <>
@@ -45,45 +50,46 @@ const PharmacyOrders = () => {
                         <div class="col-md-7 col-lg-8 col-xl-9">
                             <div class="card card-table">
                                 <div class="card-body">
-                                    <div class="prescriptions">
+                                    <div class="tests">
                                         <div class="table-responsive">
                                             <table class="table table-hover table-center mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Product</th>
                                                         <th>Patient Name</th>
-                                                        <th>Quantity</th>
-                                                        <th>Status</th>
-                                                        <th></th>
+                                                        <th>Test Name</th>
+                                                        <th>Time</th>
+                                                        <th>Date</th>
                                                     </tr>
                                                 </thead>
-                                                {prescriptions.map((prescription) => (
+                                                {tests.map((test) => (
                                                     <tbody>
                                                         <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <p href=""
-                                                                        class="avatar avatar-sm mr-2">
-                                                                        <img
-                                                                            class="avatar-img"
-                                                                            src={prescription.selectedFile}
-                                                                            alt="User pic"
-                                                                        />
-                                                                    </p>
-                                                                    <a href={prescription.selectedFile} download class="fas fa-download"></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>{prescription.patientId}</td>
-                                                            <td>{prescription.quantity}</td>
-                                                            <td>{prescription.prescriptionStatus}</td>
-                                                            <td>{prescription.prescriptionStatus === 'active' ?
-                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
+                                                            <td>{test.patientId}</td>
+                                                            <td>{test.testName}</td>
+                                                            <td>{test.testTime}</td>
+                                                            <td>{test.testDate}</td>
+                                                            <td>{test.testStatus === 'active' ?
+                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
                                                                     <i class="fas fa-times"></i> Cancel
                                                                 </button> :
-                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
+                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
                                                                     <i class="fas fa-check"></i> Accept
                                                                 </button>
                                                             }</td>
+                                                            <td>
+                                                                {
+                                                                    test.testStatus === 'active' && (
+                                                                        <div>
+                                                                            <FileBase type="file" multiple={false}
+                                                                                onDone={({ base64 }) => setLabReport({ ...labReport, selectedFile: base64 })}
+                                                                            />
+                                                                            <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(updateTest(test._id, labReport))}>
+                                                                                Add Report
+                                                                            </button>
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 ))}
@@ -102,4 +108,4 @@ const PharmacyOrders = () => {
     )
 }
 
-export default PharmacyOrders
+export default LaboratoryOrders

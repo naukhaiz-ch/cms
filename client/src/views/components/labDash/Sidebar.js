@@ -5,50 +5,50 @@ const Sidebar = () => {
     const [user] = useState(JSON.parse(localStorage.getItem('profile')))
     return (
         <>
-            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-                <div class="profile-sidebar">
-                    <div class="widget-profile pro-widget-content">
-                        <div class="profile-info-widget">
-                            <Link to="/lab-profile" class="booking-doc-img">
+            <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                <div className="profile-sidebar">
+                    <div className="widget-profile pro-widget-content">
+                        <div className="profile-info-widget">
+                            <Link to="/lab-profile" className="booking-doc-img">
                                 <img
                                     src="assets/img/doctors/doctor-thumb-02.jpg"
                                     alt="User pic"
                                 />
                             </Link>
-                            <div class="profile-det-info">
+                            <div className="profile-det-info">
                                 <h3>{user.result.name}</h3>
-                                <div class="patient-details">
-                                    <h5 class="mb-0">
+                                <div className="patient-details">
+                                    <h5 className="mb-0">
                                         {user.result.location}
                                     </h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="dashboard-widget">
-                        <nav class="dashboard-menu">
+                    <div className="dashboard-widget">
+                        <nav className="dashboard-menu">
                             <ul>
-                                <li class="active">
+                                <li>
                                     <Link to={`/${user?.result?.userRole}`}>
-                                        <i class="fas fa-columns"></i>
+                                        <i className="fas fa-columns"></i>
                                         <span>Dashboard</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/bookings">
-                                        <i class="fas fa-calendar-check"></i>
-                                        <span>Bookings</span>
+                                    <Link to="/laboratory-orders">
+                                        <i className="fas fa-calendar"></i>
+                                        <span>Test Bookings</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="invoices.html">
-                                        <i class="fas fa-file-invoice"></i>
+                                        <i className="fas fa-file-invoice"></i>
                                         <span>Invoices</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="doctor-profile-settings.html">
-                                        <i class="fas fa-user-cog"></i>
+                                        <i className="fas fa-user-cog"></i>
                                         <span>Profile Settings</span>
                                     </Link>
                                 </li>

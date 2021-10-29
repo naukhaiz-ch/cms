@@ -12,7 +12,7 @@ const initialState = {
     confirmPassword: '',
     phoneNO: '',
     userRole: '',
-    userStatus: 'active'
+    userStatus: 'inactive'
 }
 
 const Auth = () => {

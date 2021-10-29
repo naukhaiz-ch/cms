@@ -9,6 +9,7 @@ import appointmentRoutes from './routes/Appointments.js'
 import userRoutes from './routes/users.js'
 import prescriptionRoutes from './routes/Prescription.js'
 import medicineRoutes from './routes/Medicines.js'
+import testRoutes from './routes/Tests.js'
 
 const app = express()
 dotenv.config()
@@ -22,6 +23,7 @@ app.use('/users', userRoutes)
 app.use('/appointments', appointmentRoutes)
 app.use('/prescriptions', prescriptionRoutes)
 app.use('/medicines', medicineRoutes)
+app.use('/tests', testRoutes)
 
 
 const PORT = process.env.PORT || 5001

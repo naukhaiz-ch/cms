@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useLocation } from "react-router"
 import { useDispatch } from "react-redux"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { createAppointment } from '../../../actions/Appointment'
+import { createTest } from '../../../actions/Test'
 
 const axios = require("axios")
 
@@ -51,17 +52,8 @@ export default function PaymentForm(props) {
 
     const dispatch = useDispatch()
     const location = useLocation()
-    const { totalBill, patientId, doctorId, appointmentTime, appointmentDate } = location.state
+    const { checkoutType } = location.state
     const localUser = JSON.parse(localStorage.getItem('profile'))
-
-    const appointmentData = ({
-        doctorId: doctorId,
-        patientId: patientId,
-        totalBill: totalBill,
-        appointmentTime: appointmentTime,
-        appointmentStatus: 'inactive',
-        appointmentDate: appointmentDate
-    })
 
     let history = useHistory()
 
@@ -75,6 +67,62 @@ export default function PaymentForm(props) {
         email: localUser?.result?.email,
         name: localUser?.result?.name
     }
+
+    const [totalBill, setTotalBill] = useState(null)
+    const [appointmentData, setAppointmentData] = useState({
+        checkoutType: '',
+        doctorId: '',
+        patientId: '',
+        totalBill: '',
+        appointmentTime: '',
+        appointmentStatus: '',
+        appointmentDate: ''
+    })
+
+    const [labTestData, setLabTestData] = useState({
+        totalBill: '',
+        patientId: '',
+        labId: '',
+        testTime: '',
+        testDate: '',
+        selectedFile: '',
+        testName: ''
+    })
+
+    useEffect(() => {
+        if (checkoutType === 'docAppointment') {
+            const { totalBill, patientId, doctorId, appointmentTime, appointmentDate, appointmentStatus } = location.state
+
+            setAppointmentData({
+                doctorId: doctorId,
+                patientId: patientId,
+                totalBill: totalBill,
+                appointmentTime: appointmentTime,
+                appointmentStatus: appointmentStatus,
+                appointmentDate: appointmentDate
+            })
+
+            setTotalBill(totalBill)
+        }
+
+        if (checkoutType === 'labTest') {
+            const { totalBill, patientId, labId, testTime, testDate, testName, testStatus, selectedFile } = location.state
+
+            setLabTestData({
+                totalBill: totalBill,
+                patientId: patientId,
+                labId: labId,
+                testTime: testTime,
+                testDate: testDate,
+                testName: testName,
+                selectedFile: selectedFile,
+                testStatus: testStatus
+            })
+
+            setTotalBill(totalBill)
+        }
+    })
+
 
     //resets state on completion
     const reset = () => {
@@ -180,7 +228,15 @@ export default function PaymentForm(props) {
             if (confirmedPayment) {
                 reset()
 
-                dispatch(createAppointment(appointmentData))
+                if (checkoutType === 'docAppointment') {
+                    dispatch(createAppointment(appointmentData))
+                    // alert(JSON.stringify(appointmentData))
+                }
+
+                if (checkoutType === 'labTest') {
+                    dispatch(createTest(labTestData))
+                    // alert(JSON.stringify(labTestData))
+                }
 
                 setSuccess(true)
             }

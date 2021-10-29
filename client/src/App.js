@@ -18,6 +18,7 @@ import EditProfile from './views/EditProfile';
 import Aboutus from './views/Aboutus';
 import Contactus from './views/Contactus';
 import PaymentComponent from './views/components/payment/paymentComponent';
+import LaboratoryOrders from './views/LaboratoryOrders';
 import PharmacyOrders from './views/PharmacyOrders';
 import VideoCall from './views/VideoCall';
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/doc-profile" exact component={() => <DocProfile />} />
           <Route path="/lab-profile" exact component={() => <LabProfile />} />
           <Route path="/pharmacy-profile" exact component={() => <PharmacyProfile />} />
+          <Route path="/laboratory-orders" exact component={() => <LaboratoryOrders />} />
           <Route path="/pharmacy-orders" exact component={() => <PharmacyOrders />} />
           <Route path="/video-call" exact component={() => <VideoCall />} />
           <Route path="/checkout">

@@ -12,9 +12,11 @@ const LaboratoryList = () => {
     const localUser = JSON.parse(localStorage.getItem('profile'))
 
     const [testData, setTestData] = useState({
-        time: '',
-        date: '',
-        testName: ''
+        testTime: '',
+        testDate: '',
+        testName: '',
+        selectedFile: '',
+        testStatus: 'inactive'
     })
 
 
@@ -60,6 +62,9 @@ const LaboratoryList = () => {
                                                                 <i className="fas fa-map-marker-alt mr-1"></i>
                                                                 {user.address}
                                                             </p>
+                                                            <p className="doc-location mb-2 text-ellipse">
+                                                                <i className="far fa-money-bill-alt"></i> {user.credits}
+                                                            </p>
                                                             <p className="doc-location mb-2">
                                                                 <i className="fas fa-chevron-right mr-1"></i> Opens at
                                                                 08.00 AM
@@ -72,8 +77,8 @@ const LaboratoryList = () => {
                                                 <div className="clinic-booking">
                                                     <Link className="view-pro-btn" to="/lab-profile"
                                                     >View Details</Link>
-                                                    <input type="date" className="apt-btn" name="date" onChange={(e) => setTestData({ ...testData, date: e.target.value })} />
-                                                    <input type="time" className="apt-btn" name="time" onChange={(e) => setTestData({ ...testData, time: e.target.value })} />
+                                                    <input type="date" className="apt-btn" name="date" onChange={(e) => setTestData({ ...testData, testDate: e.target.value })} />
+                                                    <input type="time" className="apt-btn" name="time" onChange={(e) => setTestData({ ...testData, testTime: e.target.value })} />
                                                     <select name="test" id="test" className="apt-btn" onChange={(e) => setTestData({ ...testData, testName: e.target.value })} >
                                                         <option value="select">Select Test </option>
                                                         <option value="cbc">CBC</option>
@@ -83,17 +88,19 @@ const LaboratoryList = () => {
                                                     <Link className="apt-btn" to={{
                                                         pathname: '/checkout',
                                                         state: {
-                                                            totalBill: '1000',
+                                                            checkoutType: 'labTest',
+                                                            totalBill: user.credits,
                                                             patientId: localUser?.result?._id,
                                                             labId: user._id,
-                                                            testTime: testData.time,
-                                                            testDate: testData.date,
-                                                            testName: testData.testName
+                                                            testTime: testData.testTime,
+                                                            testDate: testData.testDate,
+                                                            testName: testData.testName,
+                                                            selectedFile: testData.selectedFile,
+                                                            testStatus: testData.testStatus
                                                         }
                                                     }}>
                                                         Proceed Booking
                                                     </Link>
-                                                    {/* <button onClick={() => alert(JSON.stringify(testData))}>Booking</button> */}
                                                 </div>
                                             </div>
                                         </div>

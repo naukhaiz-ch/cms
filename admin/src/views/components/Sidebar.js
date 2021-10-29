@@ -17,10 +17,6 @@ function Sidebar() {
                                 ><i className="fe fe-layout"></i> <span>Appointments</span></Link>
                             </li>
                             <li>
-                                <Link to="/specialities"
-                                ><i className="fe fe-users"></i> <span>Specialities</span></Link>
-                            </li>
-                            <li>
                                 <Link to="/doctors"
                                 ><i className="fe fe-user-plus"></i> <span>Doctors</span></Link
                                 >
@@ -40,17 +36,6 @@ function Sidebar() {
                                 ><i className="fe fe-vector"></i> <span>Pharmacy List</span></Link
                                 >
                             </li>
-                            <li>
-                                <Link to="product-list.html"
-                                ><i className="fe fe-layout"></i> <span>Blogs</span></Link
-                                >
-                            </li>
-                            <li>
-                                <Link to="product-list.html"
-                                ><i className="fe fe-layout"></i> <span>Product List</span></Link
-                                >
-                            </li>
-
                         </ul>
                     </div>
                 </div>

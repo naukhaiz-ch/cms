@@ -43,11 +43,11 @@ const Sidebar = () => {
                             <li>
                                 <Link to="medical-records.html">
                                     <i class="fas fa-clipboard"></i>
-                                    <span>Add Medical Records</span>
+                                    <span>Medical Records</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to="edit-profile">
+                                <Link to="/edit-profile">
                                     <i class="fas fa-user-cog"></i>
                                     <span>Profile Settings</span>
                                 </Link>

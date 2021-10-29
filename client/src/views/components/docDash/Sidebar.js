@@ -41,30 +41,6 @@ const Sidebar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="schedule-timings.html">
-                                        <i class="fas fa-hourglass-start"></i>
-                                        <span>Schedule Timings</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="available-timings.html">
-                                        <i class="fas fa-clock"></i>
-                                        <span>Available Timings</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="invoices.html">
-                                        <i class="fas fa-file-invoice"></i>
-                                        <span>Invoices</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="accounts.html">
-                                        <i class="fas fa-file-invoice-dollar"></i>
-                                        <span>Accounts</span>
-                                    </Link>
-                                </li>
-                                <li>
                                     <Link to="/edit-profile">
                                         <i class="fas fa-user-cog"></i>
                                         <span>Profile Settings</span>

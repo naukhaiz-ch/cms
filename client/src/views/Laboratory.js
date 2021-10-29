@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './components/Navbar';
 import { Link } from 'react-router-dom';
 import Footer from './components/Footer';
-import Sidebar from './components/pharmDash/Sidebar';
+import Sidebar from './components/labDash/Sidebar';
 
 const Laboratory = () => {
     return (

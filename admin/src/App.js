@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
-        {!user?.result?.name ? <Route exact path="/" component={Auth} /> : <Route path="/" exact component={Dashboard} />}
+        {!user?.result?.name ? <Route exact path="/" component={Auth} /> : <Route path="/dashboard" exact component={Dashboard} />}
         <Route path="/dashboard" exact component={() => <Dashboard />} />
         <Route path="/appointments" exact component={() => <Appointments />} />
         <Route path="/doctors" exact component={() => <Doctor />} />

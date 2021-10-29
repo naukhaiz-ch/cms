@@ -11,9 +11,13 @@ const DocList = () => {
     const users = useSelector((state) => state.users)
     const localUser = JSON.parse(localStorage.getItem('profile'))
 
-    const [timeAndDate, setTimeAndDate] = useState({
-        time: '',
-        date: ''
+    const [appointmentData, setAppointmentData] = useState({
+        doctorId: '',
+        patientId: '',
+        totalBill: '',
+        appointmentTime: '',
+        appointmentDate: '',
+        appointmentStatus: 'inactive'
     })
 
     useEffect(() => {
@@ -65,16 +69,18 @@ const DocList = () => {
                                                 <div className="clinic-booking">
                                                     <Link className="view-pro-btn" to="/doc-profile"
                                                     >View Profile</Link>
-                                                    <input type="date" className="apt-btn" name="date" onChange={(e) => setTimeAndDate({ ...timeAndDate, date: e.target.value })} />
-                                                    <input type="time" className="apt-btn" name="time" onChange={(e) => setTimeAndDate({ ...timeAndDate, time: e.target.value })} />
+                                                    <input type="date" className="apt-btn" name="date" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentDate: e.target.value })} />
+                                                    <input type="time" className="apt-btn" name="time" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentTime: e.target.value })} />
                                                     <Link className="apt-btn" to={{
                                                         pathname: '/checkout',
                                                         state: {
+                                                            checkoutType: 'docAppointment',
                                                             totalBill: user.credits,
                                                             patientId: localUser?.result?._id,
                                                             doctorId: user._id,
-                                                            appointmentTime: timeAndDate.time,
-                                                            appointmentDate: timeAndDate.date
+                                                            appointmentTime: appointmentData.appointmentTime,
+                                                            appointmentDate: appointmentData.appointmentDate,
+                                                            appointmentStatus: appointmentData.appointmentStatus
                                                         }
                                                     }}>
                                                         Book Appointment

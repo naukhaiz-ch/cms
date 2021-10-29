@@ -19,6 +19,11 @@ export const createAppointment = (newAppointment) => API.post('/appointments', n
 export const fetchAppointments = () => API.get('/appointments')
 export const changeAppointmentStatus = (id) => API.patch(`/appointments/${id}/changeAppointmentStatus `)
 
+export const createTest = (newTest) => API.post('/tests', newTest)
+export const fetchTests = () => API.get('/tests')
+export const changeTestStatus = (id) => API.patch(`/tests/${id}/changeTestStatus `)
+export const updatedTest = (id, updatedTest) => API.patch(`/tests/${id}`, updatedTest)
+
 export const createPrescription = (newPrescription) => API.post('/prescriptions', newPrescription)
 export const fetchPrescriptions = () => API.get('/prescriptions')
 export const changePrescriptionStatus = (id) => API.patch(`/prescriptions/${id}/changePrescriptionStatus `)
