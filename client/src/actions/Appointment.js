@@ -37,3 +37,15 @@ export const changeAppointmentStatus = (id) => async (dispatch) => {
         console.log(error)
     }
 }
+
+export const updateAppointment = (id, appointmentData) => async (dispatch) => {
+    try {
+        const { data } = await api.updatedAppointment(id, appointmentData)
+        dispatch({
+            type: UPDATE_APPOINTMENT,
+            payload: data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}

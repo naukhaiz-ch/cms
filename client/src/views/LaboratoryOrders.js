@@ -69,7 +69,7 @@ const LaboratoryOrders = () => {
                                                             <td>{test.testTime}</td>
                                                             <td>{test.testDate}</td>
                                                             <td>{test.testStatus === 'active' ?
-                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
+                                                                <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
                                                                     <i class="fas fa-times"></i> Cancel
                                                                 </button> :
                                                                 <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
@@ -77,18 +77,16 @@ const LaboratoryOrders = () => {
                                                                 </button>
                                                             }</td>
                                                             <td>
-                                                                {
-                                                                    test.testStatus === 'active' && (
-                                                                        <div>
-                                                                            <FileBase type="file" multiple={false}
-                                                                                onDone={({ base64 }) => setLabReport({ ...labReport, selectedFile: base64 })}
-                                                                            />
-                                                                            <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(updateTest(test._id, labReport))}>
-                                                                                Add Report
-                                                                            </button>
-                                                                        </div>
-                                                                    )
-                                                                }
+                                                                {test.testStatus === 'active' && (
+                                                                    <div>
+                                                                        <FileBase type="file" multiple={false}
+                                                                            onDone={({ base64 }) => setLabReport({ ...labReport, selectedFile: base64 })}
+                                                                        />
+                                                                        <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(updateTest(test._id, labReport))}>
+                                                                            Add Report
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                             </td>
                                                         </tr>
                                                     </tbody>

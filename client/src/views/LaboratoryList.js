@@ -85,22 +85,28 @@ const LaboratoryList = () => {
                                                         <option value="lft">LFT</option>
                                                         <option value="xray">X-Ray</option>
                                                     </select>
-                                                    <Link className="apt-btn" to={{
-                                                        pathname: '/checkout',
-                                                        state: {
-                                                            checkoutType: 'labTest',
-                                                            totalBill: user.credits,
-                                                            patientId: localUser?.result?._id,
-                                                            labId: user._id,
-                                                            testTime: testData.testTime,
-                                                            testDate: testData.testDate,
-                                                            testName: testData.testName,
-                                                            selectedFile: testData.selectedFile,
-                                                            testStatus: testData.testStatus
-                                                        }
-                                                    }}>
-                                                        Proceed Booking
-                                                    </Link>
+                                                    {!localUser?.result?.name ?
+                                                        <button className="apt-btn" onClick={() => alert('Please Login to Continue !')}>
+                                                            Book Appointment
+                                                        </button>
+                                                        :
+                                                        <Link className="apt-btn" to={{
+                                                            pathname: '/checkout',
+                                                            state: {
+                                                                checkoutType: 'labTest',
+                                                                totalBill: user.credits,
+                                                                patientId: localUser?.result?._id,
+                                                                labId: user._id,
+                                                                testTime: testData.testTime,
+                                                                testDate: testData.testDate,
+                                                                testName: testData.testName,
+                                                                selectedFile: testData.selectedFile,
+                                                                testStatus: testData.testStatus
+                                                            }
+                                                        }}>
+                                                            Proceed Booking
+                                                        </Link>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

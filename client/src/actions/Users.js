@@ -13,11 +13,21 @@ export const getUsers = (userRole) => async (dispatch) => {
         console.log(error)
     }
 }
+export const getAllUsers = () => async (dispatch) => {
+    try {
+        const { data } = await api.fetchAllUsers()
+        dispatch({
+            type: FETCH_ALL_USERS,
+            payload: data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export const getSingleUser = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchSingleUser(id)
-        // alert(JSON.stringify(data))
         return (JSON.stringify(data))
     } catch (error) {
         console.log(error)

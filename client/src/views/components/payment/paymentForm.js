@@ -91,7 +91,7 @@ export default function PaymentForm(props) {
 
     useEffect(() => {
         if (checkoutType === 'docAppointment') {
-            const { totalBill, patientId, doctorId, appointmentTime, appointmentDate, appointmentStatus } = location.state
+            const { totalBill, patientId, doctorId, appointmentTime, appointmentDate, appointmentStatus, description } = location.state
 
             setAppointmentData({
                 doctorId: doctorId,
@@ -99,7 +99,8 @@ export default function PaymentForm(props) {
                 totalBill: totalBill,
                 appointmentTime: appointmentTime,
                 appointmentStatus: appointmentStatus,
-                appointmentDate: appointmentDate
+                appointmentDate: appointmentDate,
+                description: description
             })
 
             setTotalBill(totalBill)

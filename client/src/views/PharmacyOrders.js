@@ -5,15 +5,18 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Sidebar from './components/pharmDash/Sidebar';
 import { getPrescriptions, changePrescriptionStatus } from '../actions/Prescription';
+import { getAllUsers } from './../actions/Users';
 
 const PharmacyOrders = () => {
     const dispatch = useDispatch()
     const localUser = JSON.parse(localStorage.getItem('profile'))
     const prescriptions = useSelector((state) => state.prescriptions)
+    const users = useSelector((state) => state.users)
     const id = localUser?.result?._id
 
     useEffect(() => {
         dispatch(getPrescriptions())
+        dispatch(getAllUsers())
     }, dispatch)
 
     return (
@@ -58,36 +61,45 @@ const PharmacyOrders = () => {
                                                     </tr>
                                                 </thead>
                                                 {prescriptions.map((prescription) => (
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <p href=""
-                                                                        class="avatar avatar-sm mr-2">
-                                                                        <img
-                                                                            class="avatar-img"
-                                                                            src={prescription.selectedFile}
-                                                                            alt="User pic"
-                                                                        />
-                                                                    </p>
-                                                                    <a href={prescription.selectedFile} download class="fas fa-download"></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>{prescription.patientId}</td>
-                                                            <td>{prescription.quantity}</td>
-                                                            <td>{prescription.prescriptionStatus}</td>
-                                                            <td>{prescription.prescriptionStatus === 'active' ?
-                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
-                                                                    <i class="fas fa-times"></i> Cancel
-                                                                </button> :
-                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
-                                                                    <i class="fas fa-check"></i> Accept
-                                                                </button>
-                                                            }</td>
-                                                        </tr>
-                                                    </tbody>
-                                                ))}
+                                                    id === prescription.pharmacyId && (
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <p class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img" src={prescription.selectedFile} alt="User pic" data-toggle="modal" data-target="#appt_details" />
+                                                                        </p>
+                                                                        <a href={prescription.selectedFile} download class="fas fa-download ml-3"></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td>{users.map((user) => (
+                                                                    user._id === prescription.patientId && (user.name)
+                                                                ))}</td>
+                                                                <td>{prescription.quantity}</td>
+                                                                <td>{prescription.prescriptionStatus}</td>
+                                                                <td>{prescription.prescriptionStatus === 'active' ?
+                                                                    <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
+                                                                        <i class="fas fa-times"></i> Cancel
+                                                                    </button> :
+                                                                    <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
+                                                                        <i class="fas fa-check"></i> Accept
+                                                                    </button>
+                                                                }</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    )))}
                                             </table>
+                                            {prescriptions.map((prescription) => (
+                                                <div class="modal fade custom-modal" id="appt_details">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <img class="avatar-img" src={prescription.selectedFile} alt="User pic" width="455px" height="455px" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +107,7 @@ const PharmacyOrders = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
             <Footer />
         </>

@@ -17,7 +17,8 @@ const DocList = () => {
         totalBill: '',
         appointmentTime: '',
         appointmentDate: '',
-        appointmentStatus: 'inactive'
+        appointmentStatus: 'inactive',
+        description: 'null'
     })
 
     useEffect(() => {
@@ -71,20 +72,27 @@ const DocList = () => {
                                                     >View Profile</Link>
                                                     <input type="date" className="apt-btn" name="date" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentDate: e.target.value })} />
                                                     <input type="time" className="apt-btn" name="time" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentTime: e.target.value })} />
-                                                    <Link className="apt-btn" to={{
-                                                        pathname: '/checkout',
-                                                        state: {
-                                                            checkoutType: 'docAppointment',
-                                                            totalBill: user.credits,
-                                                            patientId: localUser?.result?._id,
-                                                            doctorId: user._id,
-                                                            appointmentTime: appointmentData.appointmentTime,
-                                                            appointmentDate: appointmentData.appointmentDate,
-                                                            appointmentStatus: appointmentData.appointmentStatus
-                                                        }
-                                                    }}>
-                                                        Book Appointment
-                                                    </Link>
+                                                    {!localUser?.result?.name ?
+                                                        <button className="apt-btn" onClick={() => alert('Please Login to Continue !')}>
+                                                            Book Appointment
+                                                        </button>
+                                                        :
+                                                        <Link className="apt-btn" to={{
+                                                            pathname: '/checkout',
+                                                            state: {
+                                                                checkoutType: 'docAppointment',
+                                                                totalBill: user.credits,
+                                                                patientId: localUser?.result?._id,
+                                                                doctorId: user._id,
+                                                                appointmentTime: appointmentData.appointmentTime,
+                                                                appointmentDate: appointmentData.appointmentDate,
+                                                                appointmentStatus: appointmentData.appointmentStatus,
+                                                                description: appointmentData.description
+                                                            }
+                                                        }}>
+                                                            Book Appointment
+                                                        </Link>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

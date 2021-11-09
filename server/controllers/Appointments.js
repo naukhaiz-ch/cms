@@ -39,6 +39,19 @@ export const deleteAppointment = async (req, res) => {
     res.json({ message: "Appointment deleted successfully." })
 }
 
+export const updateAppointment = async (req, res) => {
+    const { id } = req.params
+    const { description } = req.body
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No appointment with id: ${id}`)
+
+    const updatedAppointment = { description, _id: id }
+
+    await Appointment.findByIdAndUpdate(id, updatedAppointment, { new: true })
+
+    res.json(updatedAppointment)
+}
+
 export const changeAppointmentStatus = async (req, res) => {
     const { id } = req.params
 

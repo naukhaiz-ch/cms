@@ -11,6 +11,7 @@ API.interceptors.request.use((req) => {
 
 
 export const fetchUsers = (userRole) => API.get(`/users/${userRole}`)
+export const fetchAllUsers = () => API.get('/users')
 export const fetchSingleUser = (id) => API.get(`/users/id/${id}`)
 export const signIn = (formData) => API.post('/users/signIn', formData)
 export const signUp = (formData) => API.post('/users/signUp', formData)
@@ -18,6 +19,7 @@ export const signUp = (formData) => API.post('/users/signUp', formData)
 export const createAppointment = (newAppointment) => API.post('/appointments', newAppointment)
 export const fetchAppointments = () => API.get('/appointments')
 export const changeAppointmentStatus = (id) => API.patch(`/appointments/${id}/changeAppointmentStatus `)
+export const updatedAppointment = (id, updatedAppointment) => API.patch(`/appointments/${id}`, updatedAppointment)
 
 export const createTest = (newTest) => API.post('/tests', newTest)
 export const fetchTests = () => API.get('/tests')

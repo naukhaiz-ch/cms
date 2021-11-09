@@ -65,8 +65,12 @@ const PharmacyList = () => {
                                                                 {user.phoneNo}
                                                             </p>
                                                             <p className="doc-location mb-2 text-ellipse">
-                                                                <i className="fas fa-map-marker-alt mr-1"></i>
-                                                                {user.address}
+                                                                <i className="fas fa-map-marker-alt mr-1">
+                                                                    {user.address}</i>
+                                                            </p>
+                                                            <p className="doc-location mb-2 text-ellipse">
+                                                                <i class="fas fa-envelope mr-1"> </i>
+                                                                {user.email}
                                                             </p>
                                                             <p className="doc-location mb-2">
                                                                 <i className="fas fa-chevron-right mr-1"></i> Opens at
@@ -92,9 +96,15 @@ const PharmacyList = () => {
                                                             <option value="15">15 Days</option>
                                                             <option value="30">30 Days</option>
                                                         </select>
-                                                        <button className="apt-btn" type="submit">
-                                                            Get Quotation
-                                                        </button>
+                                                        {!localUser?.result?.name ?
+                                                            <button className="apt-btn" onClick={() => alert('Please Login to Continue !')}>
+                                                                Get Quotation
+                                                            </button>
+                                                            :
+                                                            <button className="apt-btn" type="submit">
+                                                                Get Quotation
+                                                            </button>
+                                                        }
                                                     </div>
                                                 </form>
                                             </div>
