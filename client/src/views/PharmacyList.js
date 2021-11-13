@@ -40,78 +40,80 @@ const PharmacyList = () => {
                     <div className="row">
                         <div className="col-md-10 col-lg-9 col-xl-10 offset-1">
                             {users.map((user) => (
-                                <div className="card" key={user._id}>
-                                    <div className="card-body">
-                                        <div className="doctor-widget">
-                                            <div className="doc-info-left">
-                                                <div className="doctor-img1">
-                                                    <Link to="/lab-profile">
-                                                        <img
-                                                            src="assets/img/medical-img1.jpg"
-                                                            className="img-fluid"
-                                                            alt="User"
-                                                        />
-                                                    </Link>
-                                                </div>
-                                                <div className="doc-info-cont">
-                                                    <h4 className="doc-name mb-2">
-                                                        <Link to="/lab-profile">{user.name}</Link>
-                                                    </h4>
+                                user.userStatus === 'active' &&
+                                (
+                                    <div className="card" key={user._id}>
+                                        <div className="card-body">
+                                            <div className="doctor-widget">
+                                                <div className="doc-info-left">
+                                                    <div className="doctor-img1">
+                                                        <Link to="/lab-profile">
+                                                            <img
+                                                                src="assets/img/medical-img1.jpg"
+                                                                className="img-fluid"
+                                                                alt="User"
+                                                            />
+                                                        </Link>
+                                                    </div>
+                                                    <div className="doc-info-cont">
+                                                        <h4 className="doc-name mb-2">
+                                                            <Link to="/lab-profile">{user.name}</Link>
+                                                        </h4>
 
-                                                    <div className="clinic-details">
-                                                        <div className="clini-infos pt-3">
-                                                            <p className="doc-location mb-2">
-                                                                <i className="fas fa-phone-volume mr-1"></i>
-                                                                {user.phoneNo}
-                                                            </p>
-                                                            <p className="doc-location mb-2 text-ellipse">
-                                                                <i className="fas fa-map-marker-alt mr-1">
-                                                                    {user.address}</i>
-                                                            </p>
-                                                            <p className="doc-location mb-2 text-ellipse">
-                                                                <i class="fas fa-envelope mr-1"> </i>
-                                                                {user.email}
-                                                            </p>
-                                                            <p className="doc-location mb-2">
-                                                                <i className="fas fa-chevron-right mr-1"></i> Opens at
-                                                                08.00 AM
-                                                            </p>
+                                                        <div className="clinic-details">
+                                                            <div className="clini-infos pt-3">
+                                                                <p className="doc-location mb-2">
+                                                                    <i className="fas fa-phone-volume mr-1"></i>
+                                                                    {user.phoneNo}
+                                                                </p>
+                                                                <p className="doc-location mb-2 text-ellipse">
+                                                                    <i className="fas fa-map-marker-alt mr-1">
+                                                                        {user.address}</i>
+                                                                </p>
+                                                                <p className="doc-location mb-2 text-ellipse">
+                                                                    <i class="fas fa-envelope mr-1"> </i>
+                                                                    {user.email}
+                                                                </p>
+                                                                <p className="doc-location mb-2">
+                                                                    <i className="fas fa-chevron-right mr-1"></i> Opens at
+                                                                    08.00 AM
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="doc-info-right">
-                                                <form onSubmit={handleSubmit}>
-                                                    <div className="clinic-booking">
-                                                        <Link className="view-pro-btn" to="/pharmacy-profile">
-                                                            View Details
-                                                        </Link>
-                                                        <FileBase
-                                                            type="file" multiple={false}
-                                                            onDone={({ base64 }) => setPharmacyData({ ...pharmacyData, selectedFile: base64, pharmacyId: user._id })}
-                                                        />
-                                                        <select name="quantity" className="apt-btn" onChange={(e) => setPharmacyData({ ...pharmacyData, quantity: e.target.value })} >
-                                                            <option value="select">Select Quantity</option>
-                                                            <option value="7">7 Days</option>
-                                                            <option value="15">15 Days</option>
-                                                            <option value="30">30 Days</option>
-                                                        </select>
-                                                        {!localUser?.result?.name ?
-                                                            <button className="apt-btn" onClick={() => alert('Please Login to Continue !')}>
-                                                                Get Quotation
-                                                            </button>
-                                                            :
-                                                            <button className="apt-btn" type="submit">
-                                                                Get Quotation
-                                                            </button>
-                                                        }
-                                                    </div>
-                                                </form>
+                                                <div className="doc-info-right">
+                                                    <form onSubmit={handleSubmit}>
+                                                        <div className="clinic-booking">
+                                                            <Link className="view-pro-btn" to="/pharmacy-profile">
+                                                                View Details
+                                                            </Link>
+                                                            <FileBase
+                                                                type="file" multiple={false}
+                                                                onDone={({ base64 }) => setPharmacyData({ ...pharmacyData, selectedFile: base64, pharmacyId: user._id })}
+                                                            />
+                                                            <select name="quantity" className="apt-btn" onChange={(e) => setPharmacyData({ ...pharmacyData, quantity: e.target.value })} >
+                                                                <option value="select">Select Quantity</option>
+                                                                <option value="7">7 Days</option>
+                                                                <option value="15">15 Days</option>
+                                                                <option value="30">30 Days</option>
+                                                            </select>
+                                                            {!localUser?.result?.name ?
+                                                                <button className="apt-btn" onClick={() => alert('Please Login to Continue !')}>
+                                                                    Get Quotation
+                                                                </button>
+                                                                :
+                                                                <button className="apt-btn" type="submit">
+                                                                    Get Quotation
+                                                                </button>
+                                                            }
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                )))}
                         </div>
                     </div>
                 </div>

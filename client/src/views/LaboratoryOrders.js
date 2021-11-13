@@ -66,9 +66,11 @@ const LaboratoryOrders = () => {
                                                 {tests.map((test) => (
                                                     <tbody>
                                                         <tr>
-                                                            <td>{users.map((user) => (
-                                                                user._id === test.patientId && (user.name)
-                                                            ))}</td>
+                                                            <td>
+                                                                {users.map((user) => (
+                                                                    user._id === test.patientId && (user.name)
+                                                                ))}
+                                                            </td>
                                                             <td>{test.testName}</td>
                                                             <td>{test.testTime}</td>
                                                             <td>{test.testDate}</td>

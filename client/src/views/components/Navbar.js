@@ -92,14 +92,14 @@ const Navbar = () => {
                                     <a className="nav-link pr-0" href="null" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div className="media align-items-center">
                                             <div className="media-body  ml-2  d-none d-lg-block">
-                                                <span className="mb-0 text-sm  font-weight-bold">Welcome, {user.result.name} &nbsp;</span>
+                                                <span className="mb-0 text-sm  font-weight-bold">Welcome, {user?.result?.name} &nbsp;</span>
                                             </div>
                                             <span className="avatar avatar-sm rounded-circle">
                                                 {
-                                                    user.result.imageUrl ? (
+                                                    user?.result?.imageUrl ? (
                                                         <img alt="placeholder" src={user.result.imageUrl} />
                                                     ) : (
-                                                        <h1>{user.result.name.charAt(0)}</h1>
+                                                        <h1>{user?.result?.name.charAt(0)}</h1>
                                                     )
                                                 }
                                             </span>

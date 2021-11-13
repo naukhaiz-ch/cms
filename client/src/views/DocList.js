@@ -34,70 +34,73 @@ const DocList = () => {
                     <div className="row">
                         <div className="col-md-10 col-lg-9 col-xl-10 offset-1">
                             {users.map((user) => (
-                                <div className="card">
-                                    <div className="card-body">
-                                        <div className="doctor-widget">
-                                            <div className="doc-info-left">
-                                                <div className="doctor-img">
-                                                    <Link to="/doc-profile">
-                                                        <img
-                                                            src="assets/img/doctors/doctor-thumb-01.jpg"
-                                                            className="img-fluid"
-                                                            alt="UserImage"
-                                                        />
-                                                    </Link>
-                                                </div>
-                                                <div className="doc-info-cont">
-                                                    <h4 className="doc-name">
-                                                        <Link to="/doc-profile">{user.name}</Link>
-                                                    </h4>
-                                                    <p className="doc-speciality">
-                                                        {user.speciality}
-                                                    </p>
-                                                    <p className="doc-location">
-                                                        {user.email}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="doc-info-right">
-                                                <div className="clini-infos">
-                                                    <ul>
-                                                        <li>
-                                                            <i className="far fa-money-bill-alt"></i>{user.credits}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="clinic-booking">
-                                                    <Link className="view-pro-btn" to="/doc-profile"
-                                                    >View Profile</Link>
-                                                    <input type="date" className="apt-btn" name="date" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentDate: e.target.value })} />
-                                                    <input type="time" className="apt-btn" name="time" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentTime: e.target.value })} />
-                                                    {!localUser?.result?.name ?
-                                                        <button className="apt-btn" onClick={() => alert('Please Login to Continue !')}>
-                                                            Book Appointment
-                                                        </button>
-                                                        :
-                                                        <Link className="apt-btn" to={{
-                                                            pathname: '/checkout',
-                                                            state: {
-                                                                checkoutType: 'docAppointment',
-                                                                totalBill: user.credits,
-                                                                patientId: localUser?.result?._id,
-                                                                doctorId: user._id,
-                                                                appointmentTime: appointmentData.appointmentTime,
-                                                                appointmentDate: appointmentData.appointmentDate,
-                                                                appointmentStatus: appointmentData.appointmentStatus,
-                                                                description: appointmentData.description
-                                                            }
-                                                        }}>
-                                                            Book Appointment
+                                user.userStatus === 'active' &&
+                                (
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="doctor-widget">
+                                                <div className="doc-info-left">
+                                                    <div className="doctor-img">
+                                                        <Link to="/doc-profile">
+                                                            <img
+                                                                src="assets/img/doctors/doctor-thumb-01.jpg"
+                                                                className="img-fluid"
+                                                                alt="UserImage"
+                                                            />
                                                         </Link>
-                                                    }
+                                                    </div>
+                                                    <div className="doc-info-cont">
+                                                        <h4 className="doc-name">
+                                                            <Link to="/doc-profile">{user.name}</Link>
+                                                        </h4>
+                                                        <p className="doc-speciality">
+                                                            {user.speciality}
+                                                        </p>
+                                                        <p className="doc-location">
+                                                            {user.email}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="doc-info-right">
+                                                    <div className="clini-infos">
+                                                        <ul>
+                                                            <li>
+                                                                <i className="far fa-money-bill-alt"></i>{user.credits}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="clinic-booking">
+                                                        <Link className="view-pro-btn" to="/doc-profile"
+                                                        >View Profile</Link>
+                                                        <input type="date" className="apt-btn" name="date" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentDate: e.target.value })} />
+                                                        <input type="time" className="apt-btn" name="time" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentTime: e.target.value })} />
+                                                        {!localUser?.result?.name ?
+                                                            <button className="apt-btn" onClick={() => alert('Please Login to Continue !')}>
+                                                                Book Appointment
+                                                            </button>
+                                                            :
+                                                            <Link className="apt-btn" to={{
+                                                                pathname: '/checkout',
+                                                                state: {
+                                                                    checkoutType: 'docAppointment',
+                                                                    totalBill: user.credits,
+                                                                    patientId: localUser?.result?._id,
+                                                                    doctorId: user._id,
+                                                                    appointmentTime: appointmentData.appointmentTime,
+                                                                    appointmentDate: appointmentData.appointmentDate,
+                                                                    appointmentStatus: appointmentData.appointmentStatus,
+                                                                    description: appointmentData.description
+                                                                }
+                                                            }}>
+                                                                Book Appointment
+                                                            </Link>
+                                                        }
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                )
                             ))}
                         </div>
                     </div>

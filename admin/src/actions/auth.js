@@ -15,8 +15,6 @@ export const signIn = (formData, history) => async (dispatch) => {
             alert('Try To Sign In Again..')
             history.push('/')
         }
-
-
     } catch (error) {
         console.log(error)
     }

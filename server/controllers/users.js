@@ -12,10 +12,12 @@ export const signIn = async (req, res) => {
 
     try {
         const existingUser = await User.findOne({ email })
-        if (!existingUser) return res.status(404).json({ message: "user doesn't exist" })
+        if (!existingUser) return res.status(200).json({ message: "user doesn't exist" })
 
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
-        if (!isPasswordCorrect) return res.status(400).json({ message: "invalid credentials" })
+        if (!isPasswordCorrect) return res.status(200).json({ message: "invalid credentials" })
+
+        if (existingUser.userStatus === 'inactive') return res.status(200).json({ message: "Please contact admin" })
 
         const token = jwt.sign({
             email: existingUser.email,
