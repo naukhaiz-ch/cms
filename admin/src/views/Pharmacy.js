@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import { Link } from 'react-router-dom';
-import { getUsers } from '../actions/users';
+import { getUsers, changeUserStatus } from '../actions/users';
 import moment from 'moment';
 
 const Pharmacy = () => {
@@ -13,6 +13,7 @@ const Pharmacy = () => {
     useEffect(() => {
         dispatch(getUsers(userRole))
     }, dispatch)
+
 
     return (
         <>
@@ -55,7 +56,13 @@ const Pharmacy = () => {
                                                         <td>{user.name}</td>
                                                         <td></td>
                                                         <td>{user.email}</td>
-                                                        <td>{user.userStatus}</td>
+                                                        <td>
+                                                            {user.userStatus === 'active' ? (
+                                                                <button type="button" className="btn btn-secondary mr-0" onClick={() => dispatch(changeUserStatus(user._id))}><i className="fa fa-eye"></i></button>
+                                                            ) : (
+                                                                <button type="button" className="btn btn-warning mr-0" onClick={() => dispatch(changeUserStatus(user._id))}><i className="fa fa-eye-slash"></i></button>
+                                                            )}
+                                                        </td>
                                                         <td>{user.phoneNo}</td>
                                                         <td>{moment(user.createdAt).format("hh:mm A | MMM Mo, YYYY")}</td>
                                                     </tr>

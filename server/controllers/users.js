@@ -136,7 +136,7 @@ export const changeUserStatus = async (req, res) => {
 
     res.userId
 
-    if (!req.userId) return res.JSON({ message: 'Unauthenticated' })
+    // if (!req.userId) return res.json({ message: 'Unauthenticated' })
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`)
 
