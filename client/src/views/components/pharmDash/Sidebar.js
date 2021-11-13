@@ -37,13 +37,13 @@ const Sidebar = () => {
                                 <li>
                                     <Link to="/pharmacy-orders">
                                         <i class="fas fa-calendar-check"></i>
-                                        <span>Orders</span>
+                                        <span>Qoutations</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="invoices.html">
+                                    <Link to="/">
                                         <i class="fas fa-file-invoice"></i>
-                                        <span>Invoices</span>
+                                        <span>Orders</span>
                                     </Link>
                                 </li>
                                 <li>

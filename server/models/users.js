@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
     phoneNo: { type: String, required: true },
     createdAt: { type: Date, default: new Date() },
     userRole: { type: String, required: true },
+    userKey: { type: String },
     address: { type: String },
     speciality: { type: String },
     education: { type: String },

@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createMedicine } from '../../../actions/Medicine'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from "react-router"
+import { createMedicine } from '../../../actions/Medicine';
+import { getAllUsers } from '../../../actions/Users';
 
 const AddPrescription = () => {
     const dispatch = useDispatch()
     const localUser = JSON.parse(localStorage.getItem('profile'))
+    const users = useSelector((state) => state.users)
+    const location = useLocation()
+    const { patientId } = location.state
+
+    useEffect(() => {
+        dispatch(getAllUsers())
+    }, dispatch)
 
     const [medicineData, setMedicineData] = useState({
         doctorId: localUser?.result?._id,
-        patientId: '',
+        patientId: patientId,
         name: '',
         quantity: '',
         days: '',
-        morning: 'null',
-        afternoon: 'null',
-        night: 'null',
-        test: 'null'
+        morning: 'no',
+        afternoon: 'no',
+        night: 'no',
+        test: 'no'
     })
 
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(createMedicine(medicineData))
-        alert(JSON.stringify(medicineData))
         clear()
     }
     const clear = () => {
@@ -31,10 +39,10 @@ const AddPrescription = () => {
             name: '',
             quantity: '',
             days: '',
-            morning: 'null',
-            afternoon: 'null',
-            night: 'null',
-            test: 'null'
+            morning: 'no',
+            afternoon: 'no',
+            night: 'no',
+            test: 'no'
         })
     }
 
@@ -45,16 +53,14 @@ const AddPrescription = () => {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Add Prescription</h4>
+                                <h4 class="card-title mb-0">
+                                    Add Prescription for &nbsp;
+                                    {users.map((user) => (
+                                        user._id === patientId && (user.name)
+                                    ))}
+                                </h4>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="biller-info">
-                                            <h4 class="d-block">Patient name</h4>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="card card-table">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -81,19 +87,19 @@ const AddPrescription = () => {
                                                         <td>
                                                             <div class="form-check form-check-inline">
                                                                 <label class="form-check-label">
-                                                                    <input class="form-check-input" name="morning" type="checkbox" onChange={(e) => setMedicineData({ ...medicineData, morning: e.target.value })} checked={medicineData.morning === 'on' ? true : false} />
+                                                                    <input class="form-check-input" name="morning" type="checkbox" onChange={(e) => setMedicineData({ ...medicineData, morning: e.target.value })} />
                                                                     Morning
                                                                 </label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
                                                                 <label class="form-check-label">
-                                                                    <input class="form-check-input" name="afternoon" type="checkbox" onChange={(e) => setMedicineData({ ...medicineData, afternoon: e.target.value })} checked={medicineData.afternoon === 'on' ? true : false} />
+                                                                    <input class="form-check-input" name="afternoon" type="checkbox" onChange={(e) => setMedicineData({ ...medicineData, afternoon: e.target.value })} />
                                                                     Afternoon
                                                                 </label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
                                                                 <label class="form-check-label">
-                                                                    <input class="form-check-input" name="night" type="checkbox" onChange={(e) => setMedicineData({ ...medicineData, night: e.target.value })} checked={medicineData.night === 'on' ? true : false} />
+                                                                    <input class="form-check-input" name="night" type="checkbox" onChange={(e) => setMedicineData({ ...medicineData, night: e.target.value })} />
                                                                     Night
                                                                 </label>
                                                             </div>

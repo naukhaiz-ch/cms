@@ -4,17 +4,19 @@ import { Link } from 'react-router-dom';
 import FileBase from 'react-file-base64'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
-import Sidebar from './components/pharmDash/Sidebar';
+import Sidebar from './components/labDash/Sidebar';
 import { getTests, updateTest, changeTestStatus } from '../actions/Test';
+import { getAllUsers } from './../actions/Users';
 
 const LaboratoryOrders = () => {
     const dispatch = useDispatch()
     const localUser = JSON.parse(localStorage.getItem('profile'))
     const tests = useSelector((state) => state.tests)
-    const id = localUser?.result?._id
+    const users = useSelector((state) => state.users)
 
     useEffect(() => {
         dispatch(getTests())
+        dispatch(getAllUsers())
     }, dispatch)
 
     const [labReport, setLabReport] = useState({
@@ -64,7 +66,9 @@ const LaboratoryOrders = () => {
                                                 {tests.map((test) => (
                                                     <tbody>
                                                         <tr>
-                                                            <td>{test.patientId}</td>
+                                                            <td>{users.map((user) => (
+                                                                user._id === test.patientId && (user.name)
+                                                            ))}</td>
                                                             <td>{test.testName}</td>
                                                             <td>{test.testTime}</td>
                                                             <td>{test.testDate}</td>

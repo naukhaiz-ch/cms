@@ -75,8 +75,9 @@ const LaboratoryList = () => {
                                             </div>
                                             <div className="doc-info-right">
                                                 <div className="clinic-booking">
-                                                    <Link className="view-pro-btn" to="/lab-profile"
-                                                    >View Details</Link>
+                                                    <Link className="view-pro-btn" to="/lab-profile">
+                                                        View Details
+                                                    </Link>
                                                     <input type="date" className="apt-btn" name="date" onChange={(e) => setTestData({ ...testData, testDate: e.target.value })} />
                                                     <input type="time" className="apt-btn" name="time" onChange={(e) => setTestData({ ...testData, testTime: e.target.value })} />
                                                     <select name="test" id="test" className="apt-btn" onChange={(e) => setTestData({ ...testData, testName: e.target.value })} >

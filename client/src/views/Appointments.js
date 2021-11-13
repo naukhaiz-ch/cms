@@ -82,20 +82,37 @@ const Appointments = () => {
                                         </div>
                                         <div class="appointment-action">
                                             {appointment.appointmentStatus === 'active' ?
-                                                <button type="button" className="btn btn-danger submit-btn" data-toggle="modal" data-target="#appt_details" >
-                                                    <i class="fas fa-times"></i> Cancel
-                                                </button> :
+                                                <div>
+                                                    <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changeAppointmentStatus(appointment._id))} data-toggle="modal" data-target={`#appt_details${appointment._id}`} >
+                                                        <i class="fas fa-times"></i> Cancel
+                                                    </button>
+                                                    <button type="button" className="btn btn-primary submit-btn ml-5">
+                                                        <Link className="apt-btn" to={{
+                                                            pathname: '/video-call',
+                                                            state: {
+                                                                patientId: appointment.patientId
+                                                            }
+                                                        }}>
+                                                            Receive Call
+                                                        </Link>
+                                                    </button>
+                                                </div> :
                                                 <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changeAppointmentStatus(appointment._id))}>
                                                     <i class="fas fa-check"></i> Accept
                                                 </button>
                                             }
+
                                         </div>
                                         <div>
-                                            <div class="modal fade custom-modal" id="appt_details">
+
+                                        </div>
+
+                                        <div>
+                                            <div class="modal fade custom-modal" id={`appt_details${appointment._id}`}>
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Rejection Details</h5>
+                                                            <h5 class="modal-title">Cancelation Details</h5>
                                                             <button
                                                                 type="button"
                                                                 class="close"
@@ -106,7 +123,7 @@ const Appointments = () => {
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <label>Reason Of rejection</label>
+                                                            <label>Reason Of cancelation</label>
                                                             <textarea rows="6" cols="60" onChange={(e) => setAppointmentDescription({ ...appointmentDescription, description: e.target.value })}></textarea>
                                                             <button className="btn btn-primary submit-btn" onClick={() => dispatch(updateAppointment(appointment._id, appointmentDescription))}>
                                                                 Submit

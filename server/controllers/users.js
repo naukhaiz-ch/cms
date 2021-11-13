@@ -154,22 +154,24 @@ export const changeUserStatus = async (req, res) => {
 }
 
 export const setUserKey = async (req, res) => {
-    // const { id }      = req.params
-    // const {userKey} = req.body
+    const { id } = req.params
+    const { userKey } = req.body
 
-    // res.userId
+    // console.log(userKey)
 
-    // if(!req.userId) return res.JSON({message: 'Unauthenticated'})
+    res.userId
 
-    // if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`)
+    // if (!req.userId) return res.json({ message: 'Unauthenticated' })
 
-    // const user = await User.findById(id)
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`)
 
-    // user.userKey = userKey
+    const user = await User.findById(id)
 
-    // const updatedUser = await User.findByIdAndUpdate(id, user, { new: true })
+    user.userKey = userKey
 
-    // res.json(updatedUser)
+    const updatedUser = await User.findByIdAndUpdate(id, user, { new: true })
+
+    res.json(updatedUser)
 }
 
 export const addUserCredits = async (req, res) => {

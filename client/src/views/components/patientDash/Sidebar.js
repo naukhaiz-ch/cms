@@ -34,19 +34,6 @@ const Sidebar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="orders-list.html">
-                                    <i class="fas fa-list-alt"></i>
-                                    <span>Orders</span>
-                                    <small class="unread-msg">7</small>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="medical-records.html">
-                                    <i class="fas fa-clipboard"></i>
-                                    <span>Medical Records</span>
-                                </Link>
-                            </li>
-                            <li>
                                 <Link to="/edit-profile">
                                     <i class="fas fa-user-cog"></i>
                                     <span>Profile Settings</span>

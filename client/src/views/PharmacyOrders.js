@@ -23,34 +23,34 @@ const PharmacyOrders = () => {
         <>
             <Navbar />
 
-            <div class="breadcrumb-bar">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col-md-12 col-12">
-                            <nav aria-label="breadcrumb" class="page-breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><Link to="/">Home</Link></li>
-                                    <li class="breadcrumb-item active" aria-current="page">
+            <div className="breadcrumb-bar">
+                <div className="container-fluid">
+                    <div className="row align-items-center">
+                        <div className="col-md-12 col-12">
+                            <nav aria-label="breadcrumb" className="page-breadcrumb">
+                                <ol className="breadcrumb">
+                                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                                    <li className="breadcrumb-item active" aria-current="page">
                                         Orders
                                     </li>
                                 </ol>
                             </nav>
-                            <h2 class="breadcrumb-title">Orders</h2>
+                            <h2 className="breadcrumb-title">Orders</h2>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
+            <div className="content">
+                <div className="container-fluid">
+                    <div className="row">
                         <Sidebar />
-                        <div class="col-md-7 col-lg-8 col-xl-9">
-                            <div class="card card-table">
-                                <div class="card-body">
-                                    <div class="prescriptions">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-center mb-0">
+                        <div className="col-md-7 col-lg-8 col-xl-9">
+                            <div className="card card-table">
+                                <div className="card-body">
+                                    <div className="prescriptions">
+                                        <div className="table-responsive">
+                                            <table className="table table-hover table-center mb-0">
                                                 <thead>
                                                     <tr>
                                                         <th>Product</th>
@@ -65,11 +65,11 @@ const PharmacyOrders = () => {
                                                         <tbody>
                                                             <tr>
                                                                 <td>
-                                                                    <h2 class="table-avatar">
-                                                                        <p class="avatar avatar-sm mr-2">
-                                                                            <img class="avatar-img" src={prescription.selectedFile} alt="User pic" data-toggle="modal" data-target="#appt_details" />
+                                                                    <h2 className="table-avatar">
+                                                                        <p className="avatar avatar-sm mr-2">
+                                                                            <img className="avatar-img" src={prescription.selectedFile} alt="User pic" data-toggle="modal" data-target="#appt_details" />
                                                                         </p>
-                                                                        <a href={prescription.selectedFile} download class="fas fa-download ml-3"></a>
+                                                                        <a href={prescription.selectedFile} download className="fa fa-download ml-3"></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>{users.map((user) => (
@@ -79,10 +79,10 @@ const PharmacyOrders = () => {
                                                                 <td>{prescription.prescriptionStatus}</td>
                                                                 <td>{prescription.prescriptionStatus === 'active' ?
                                                                     <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
-                                                                        <i class="fas fa-times"></i> Cancel
+                                                                        <i className="fas fa-times"></i> Cancel
                                                                     </button> :
                                                                     <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
-                                                                        <i class="fas fa-check"></i> Accept
+                                                                        <i className="fas fa-check"></i> Accept
                                                                     </button>
                                                                 }</td>
                                                             </tr>
@@ -90,11 +90,11 @@ const PharmacyOrders = () => {
                                                     )))}
                                             </table>
                                             {prescriptions.map((prescription) => (
-                                                <div class="modal fade custom-modal" id="appt_details">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-body">
-                                                                <img class="avatar-img" src={prescription.selectedFile} alt="User pic" width="455px" height="455px" />
+                                                <div className="modal fade custom-modal" id="appt_details">
+                                                    <div className="modal-dialog modal-dialog-centered">
+                                                        <div className="modal-content">
+                                                            <div className="modal-body">
+                                                                <img className="avatar-img" src={prescription.selectedFile} alt="User pic" width="455px" height="455px" />
                                                             </div>
                                                         </div>
                                                     </div>

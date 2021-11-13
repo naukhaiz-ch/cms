@@ -5,13 +5,13 @@ const cors = require("cors")
 const io = require("socket.io")(server, {
 	cors: {
 		origin: "*",
-		methods: [ "GET", "POST" ]
+		methods: ["GET", "POST"]
 	}
 })
 
 app.use(cors())
 
-const PORT = process.env.PORT || 5001
+const PORT = process.env.PORT || 5002
 
 app.get('/', (req, res) => {
 	res.send('Running')

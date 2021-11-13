@@ -20,6 +20,7 @@ import Contactus from './views/Contactus';
 import PaymentComponent from './views/components/payment/paymentComponent';
 import LaboratoryOrders from './views/LaboratoryOrders';
 import PharmacyOrders from './views/PharmacyOrders';
+// import Stream from './views/components/videoCall/stream';
 import VideoCall from './views/VideoCall';
 
 function App() {

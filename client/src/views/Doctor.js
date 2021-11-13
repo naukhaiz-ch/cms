@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import { Link } from 'react-router-dom';
 import Footer from './components/Footer';
 import Sidebar from './components/docDash/Sidebar';
+import Appointments from './Appointments';
 
 const Doctor = () => {
     return (
