@@ -42,3 +42,15 @@ export const changePrescriptionStatus = (id) => async (dispatch) => {
 
     }
 }
+
+export const updatePrescription = (id, prescriptionData) => async (dispatch) => {
+    try {
+        const { data } = await api.updatedPrescription(id, prescriptionData)
+        dispatch({
+            type: UPDATE_PRESCRIPTION,
+            payload: data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}

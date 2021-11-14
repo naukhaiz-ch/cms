@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Sidebar from './components/pharmDash/Sidebar';
-import { getPrescriptions, changePrescriptionStatus } from '../actions/Prescription';
+import { getPrescriptions, changePrescriptionStatus, updatePrescription } from '../actions/Prescription';
 import { getAllUsers } from './../actions/Users';
 
 const PharmacyOrders = () => {
@@ -18,6 +18,10 @@ const PharmacyOrders = () => {
         dispatch(getPrescriptions())
         dispatch(getAllUsers())
     }, dispatch)
+
+    const [prescriptionDescription, setPrescriptionDescription] = useState({
+        description: ''
+    })
 
     return (
         <>
@@ -78,7 +82,7 @@ const PharmacyOrders = () => {
                                                                 <td>{prescription.quantity}</td>
                                                                 <td>{prescription.prescriptionStatus}</td>
                                                                 <td>{prescription.prescriptionStatus === 'active' ?
-                                                                    <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
+                                                                    <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))} data-toggle="modal" data-target={`#appt_details${prescription._id}`}>
                                                                         <i className="fas fa-times"></i> Cancel
                                                                     </button> :
                                                                     <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changePrescriptionStatus(prescription._id))}>
@@ -90,17 +94,44 @@ const PharmacyOrders = () => {
                                                     )))}
                                             </table>
                                             {prescriptions.map((prescription) => (
-                                                <div className="modal fade custom-modal" id="appt_details">
-                                                    <div className="modal-dialog modal-dialog-centered">
-                                                        <div className="modal-content">
-                                                            <div className="modal-body">
-                                                                <img className="avatar-img" src={prescription.selectedFile} alt="User pic" width="455px" height="455px" />
+                                                <div>
+                                                    <div className="modal fade custom-modal" id="appt_details">
+                                                        <div className="modal-dialog modal-dialog-centered">
+                                                            <div className="modal-content">
+                                                                <div className="modal-body">
+                                                                    <img className="avatar-img" src={prescription.selectedFile} alt="User pic" width="455px" height="455px" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade custom-modal" id={`appt_details${prescription._id}`}>
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Status Update</h5>
+                                                                    <button
+                                                                        type="button"
+                                                                        class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close"
+                                                                    >
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <label>Status of Prescription</label>
+                                                                    <textarea rows="6" cols="60" onChange={(e) => setPrescriptionDescription({ ...prescriptionDescription, description: e.target.value })}></textarea>
+                                                                    <button className="btn btn-primary submit-btn" onClick={() => dispatch(updatePrescription(prescription._id, prescriptionDescription))}>
+                                                                        Submit
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             ))}
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

@@ -111,16 +111,16 @@ export const getSingleUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     const { id } = req.params
-
-    const { name, email, password, message, country, city, dob, occupation, gender, birthplace, selectedFile } = req.body
+    // const { name, email, phoneNo, education, speciality, experience, address, country, city, dob, selectedFile } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`)
 
-    const updatedUser = { name, email, password, message, country, city, dob, occupation, gender, birthplace, selectedFile, _id: id }
+    const updatedUser = req.body
 
     await User.findByIdAndUpdate(id, updatedUser, { new: true })
 
     res.json(updatedUser)
+    // console.log(updatedUser)
 }
 
 export const deleteUser = async (req, res) => {

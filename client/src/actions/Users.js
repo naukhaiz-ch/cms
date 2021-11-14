@@ -1,4 +1,4 @@
-import { FETCH_ALL_USERS, UPDATE_USER } from '../constants/actionTypes'
+import { FETCH_ALL_USERS, FETCH_USER, UPDATE_USER, UPDATE_USER_PROFILE } from '../constants/actionTypes'
 import * as api from '../api/Index'
 
 // Action Creators
@@ -28,7 +28,10 @@ export const getAllUsers = () => async (dispatch) => {
 export const getSingleUser = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchSingleUser(id)
-        return (JSON.stringify(data))
+        dispatch({
+            type: FETCH_USER,
+            payload: data
+        })
     } catch (error) {
         console.log(error)
     }
@@ -39,6 +42,19 @@ export const setUserKey = (id, userKey) => async (dispatch) => {
         const { data } = await api.setUserKey(id, { userKey: userKey })
         dispatch({
             type: UPDATE_USER,
+            payload: data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const updateUser = (id, userData) => async (dispatch) => {
+    try {
+        const { data } = await api.updatedUser(id, userData)
+        dispatch({
+            type: UPDATE_USER_PROFILE,
             payload: data
         })
     } catch (error) {

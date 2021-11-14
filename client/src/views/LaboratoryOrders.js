@@ -13,6 +13,7 @@ const LaboratoryOrders = () => {
     const localUser = JSON.parse(localStorage.getItem('profile'))
     const tests = useSelector((state) => state.tests)
     const users = useSelector((state) => state.users)
+    const id = localUser?.result?._id
 
     useEffect(() => {
         dispatch(getTests())
@@ -64,38 +65,40 @@ const LaboratoryOrders = () => {
                                                     </tr>
                                                 </thead>
                                                 {tests.map((test) => (
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                {users.map((user) => (
-                                                                    user._id === test.patientId && (user.name)
-                                                                ))}
-                                                            </td>
-                                                            <td>{test.testName}</td>
-                                                            <td>{test.testTime}</td>
-                                                            <td>{test.testDate}</td>
-                                                            <td>{test.testStatus === 'active' ?
-                                                                <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
-                                                                    <i class="fas fa-times"></i> Cancel
-                                                                </button> :
-                                                                <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
-                                                                    <i class="fas fa-check"></i> Accept
-                                                                </button>
-                                                            }</td>
-                                                            <td>
-                                                                {test.testStatus === 'active' && (
-                                                                    <div>
-                                                                        <FileBase type="file" multiple={false}
-                                                                            onDone={({ base64 }) => setLabReport({ ...labReport, selectedFile: base64 })}
-                                                                        />
-                                                                        <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(updateTest(test._id, labReport))}>
-                                                                            Add Report
-                                                                        </button>
-                                                                    </div>
-                                                                )}
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
+                                                    id === test.labId && (
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    {users.map((user) => (
+                                                                        user._id === test.patientId && (user.name)
+                                                                    ))}
+                                                                </td>
+                                                                <td>{test.testName}</td>
+                                                                <td>{test.testTime}</td>
+                                                                <td>{test.testDate}</td>
+                                                                <td>{test.testStatus === 'active' ?
+                                                                    <button type="button" className="btn btn-danger submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
+                                                                        <i class="fas fa-times"></i> Cancel
+                                                                    </button> :
+                                                                    <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(changeTestStatus(test._id))}>
+                                                                        <i class="fas fa-check"></i> Accept
+                                                                    </button>
+                                                                }</td>
+                                                                <td>
+                                                                    {test.testStatus === 'active' && (
+                                                                        <div>
+                                                                            <FileBase type="file" multiple={false}
+                                                                                onDone={({ base64 }) => setLabReport({ ...labReport, selectedFile: base64 })}
+                                                                            />
+                                                                            <button type="button" className="btn btn-primary submit-btn" onClick={() => dispatch(updateTest(test._id, labReport))}>
+                                                                                Add Report
+                                                                            </button>
+                                                                        </div>
+                                                                    )}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    )
                                                 ))}
                                             </table>
                                         </div>

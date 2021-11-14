@@ -47,9 +47,11 @@ const PharmacyList = () => {
                                             <div className="doctor-widget">
                                                 <div className="doc-info-left">
                                                     <div className="doctor-img1">
-                                                        <Link to="/lab-profile">
+                                                        <Link to={{
+                                                            pathname: '/user-profile', state: { userId: user._id }
+                                                        }}>
                                                             <img
-                                                                src="assets/img/medical-img1.jpg"
+                                                                src={user.selectedFile}
                                                                 className="img-fluid"
                                                                 alt="User"
                                                             />
@@ -57,7 +59,11 @@ const PharmacyList = () => {
                                                     </div>
                                                     <div className="doc-info-cont">
                                                         <h4 className="doc-name mb-2">
-                                                            <Link to="/lab-profile">{user.name}</Link>
+                                                            <Link to={{
+                                                                pathname: '/user-profile', state: { userId: user._id }
+                                                            }}>
+                                                                {user.name}
+                                                            </Link>
                                                         </h4>
 
                                                         <div className="clinic-details">

@@ -41,13 +41,7 @@ const Sidebar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="invoices.html">
-                                        <i className="fas fa-file-invoice"></i>
-                                        <span>Invoices</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="doctor-profile-settings.html">
+                                    <Link to="/edit-profile">
                                         <i className="fas fa-user-cog"></i>
                                         <span>Profile Settings</span>
                                     </Link>

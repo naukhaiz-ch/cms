@@ -41,9 +41,11 @@ const DocList = () => {
                                             <div className="doctor-widget">
                                                 <div className="doc-info-left">
                                                     <div className="doctor-img">
-                                                        <Link to="/doc-profile">
+                                                        <Link className="apt-btn" to={{
+                                                            pathname: '/user-profile', state: { userId: user._id }
+                                                        }}>
                                                             <img
-                                                                src="assets/img/doctors/doctor-thumb-01.jpg"
+                                                                src={user.selectedFile}
                                                                 className="img-fluid"
                                                                 alt="UserImage"
                                                             />
@@ -51,7 +53,11 @@ const DocList = () => {
                                                     </div>
                                                     <div className="doc-info-cont">
                                                         <h4 className="doc-name">
-                                                            <Link to="/doc-profile">{user.name}</Link>
+                                                            <Link to={{
+                                                                pathname: '/user-profile', state: { userId: user._id }
+                                                            }}>
+                                                                {user.name}
+                                                            </Link>
                                                         </h4>
                                                         <p className="doc-speciality">
                                                             {user.speciality}
@@ -70,8 +76,11 @@ const DocList = () => {
                                                         </ul>
                                                     </div>
                                                     <div className="clinic-booking">
-                                                        <Link className="view-pro-btn" to="/doc-profile"
-                                                        >View Profile</Link>
+                                                        <Link className="view-pro-btn" to={{
+                                                            pathname: '/user-profile', state: { userId: user._id }
+                                                        }}>
+                                                            View Profile
+                                                        </Link>
                                                         <input type="date" className="apt-btn" name="date" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentDate: e.target.value })} />
                                                         <input type="time" className="apt-btn" name="time" onChange={(e) => setAppointmentData({ ...appointmentData, appointmentTime: e.target.value })} />
                                                         {!localUser?.result?.name ?

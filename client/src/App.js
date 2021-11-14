@@ -9,9 +9,7 @@ import DocList from './views/DocList';
 import LaboratoryList from './views/LaboratoryList';
 import PharmacyList from './views/PharmacyList';
 import Auth from './views/components/Auth';
-import DocProfile from './views/DocProfile';
-import LabProfile from './views/LabProfile';
-import PharmacyProfile from './views/PharmacyProfile';
+import UserProfile from './views/UserProfile';
 import Patient from './views/Patient';
 import Appointments from './views/Appointments';
 import EditProfile from './views/EditProfile';
@@ -20,7 +18,6 @@ import Contactus from './views/Contactus';
 import PaymentComponent from './views/components/payment/paymentComponent';
 import LaboratoryOrders from './views/LaboratoryOrders';
 import PharmacyOrders from './views/PharmacyOrders';
-// import Stream from './views/components/videoCall/stream';
 import VideoCall from './views/VideoCall';
 
 function App() {
@@ -41,9 +38,7 @@ function App() {
           <Route path="/laboratory-list" exact component={() => <LaboratoryList />} />
           <Route path="/pharmacy-list" exact component={() => <PharmacyList />} />
           <Route path="/edit-profile" exact component={() => <EditProfile />} />
-          <Route path="/doc-profile" exact component={() => <DocProfile />} />
-          <Route path="/lab-profile" exact component={() => <LabProfile />} />
-          <Route path="/pharmacy-profile" exact component={() => <PharmacyProfile />} />
+          <Route path="/user-profile" exact component={() => <UserProfile />} />
           <Route path="/laboratory-orders" exact component={() => <LaboratoryOrders />} />
           <Route path="/pharmacy-orders" exact component={() => <PharmacyOrders />} />
           <Route path="/video-call" exact component={() => <VideoCall />} />

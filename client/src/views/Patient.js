@@ -5,7 +5,7 @@ import moment from 'moment';
 import { getAppointments } from '../actions/Appointment';
 import { getMedicines } from '../actions/Medicine';
 import { getPrescriptions } from '../actions/Prescription';
-import { getTests, createTest } from '../actions/Test';
+import { getTests, createTest, deleteTest } from '../actions/Test';
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import { Link } from 'react-router-dom';
@@ -134,7 +134,12 @@ const Patient = () => {
                                                                         <tr>
                                                                             <td>
                                                                                 {users.map((user) => (
-                                                                                    user._id === appointment.doctorId && (user.name)
+                                                                                    user._id === appointment.doctorId && (
+                                                                                        <Link className="view-pro-btn" to={{
+                                                                                            pathname: '/user-profile', state: { userId: user._id }
+                                                                                        }}>
+                                                                                            {user.name}
+                                                                                        </Link>)
                                                                                 ))}
                                                                             </td>
                                                                             <td>{appointment.appointmentTime}</td>
@@ -194,7 +199,12 @@ const Patient = () => {
                                                                             <td>{moment(medicine.createdAt).format("hh:mm A | MMM Mo, YYYY")}</td>
                                                                             <td>
                                                                                 {users.map((user) => (
-                                                                                    user._id === medicine.doctorId && (user.name)
+                                                                                    user._id === medicine.doctorId && (
+                                                                                        <Link className="view-pro-btn" to={{
+                                                                                            pathname: '/user-profile', state: { userId: user._id }
+                                                                                        }}>
+                                                                                            {user.name}
+                                                                                        </Link>)
                                                                                 ))}
                                                                             </td>
                                                                             <td>{medicine.name}</td>
@@ -245,7 +255,12 @@ const Patient = () => {
                                                                             </td>
                                                                             <td>
                                                                                 {users.map((user) => (
-                                                                                    user._id === prescription.pharmacyId && (user.name)
+                                                                                    user._id === prescription.pharmacyId && (
+                                                                                        <Link className="view-pro-btn" to={{
+                                                                                            pathname: '/user-profile', state: { userId: user._id }
+                                                                                        }}>
+                                                                                            {user.name}
+                                                                                        </Link>)
                                                                                 ))}
                                                                             </td>
                                                                             <td>{prescription.quantity}</td>
@@ -290,7 +305,12 @@ const Patient = () => {
                                                                         <tr>
                                                                             <td>
                                                                                 {users.map((user) => (
-                                                                                    user._id === test.labId && (user.name)
+                                                                                    user._id === test.labId && (
+                                                                                        <Link className="view-pro-btn" to={{
+                                                                                            pathname: '/user-profile', state: { userId: user._id }
+                                                                                        }}>
+                                                                                            {user.name}
+                                                                                        </Link>)
                                                                                 ))}
                                                                             </td>
                                                                             <td>{test.testName}</td>
@@ -303,7 +323,7 @@ const Patient = () => {
                                                                                 </h2>
                                                                             </td>
                                                                             <td>
-                                                                                <i class="btn btn-sm bg-danger-light far fa-trash-alt ml-3"></i>
+                                                                                <i class="btn btn-sm bg-danger-light far fa-trash-alt ml-3" onClick={() => dispatch(deleteTest(test._id))}></i>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>

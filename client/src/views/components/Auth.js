@@ -96,13 +96,13 @@ const Auth = () => {
                                                     </div>
                                                     <div>
                                                         <p>Please select your account type </p>
-                                                        <input type="radio" id="patient" name="userRole" value="Patient" onChange={handleChange} />
+                                                        <input type="radio" id="patient" name="userRole" value="Patient" onClick={() => setFormData({ ...formData, userStatus: 'active', userRole: 'Patient' })} />
                                                         <label for="patient" style={{ padding: '10px' }}>Patient</label>
-                                                        <input type="radio" id="doctor" name="userRole" value="Doctor" onChange={handleChange} />
+                                                        <input type="radio" id="doctor" name="userRole" value="Doctor" onClick={() => setFormData({ ...formData, userStatus: 'inactive', userRole: 'Doctor' })} />
                                                         <label for="doctor" style={{ padding: '10px' }}>Doctor</label>
-                                                        <input type="radio" id="laboratory" name="userRole" value="Laboratory" onChange={handleChange} />
+                                                        <input type="radio" id="laboratory" name="userRole" value="Laboratory" onClick={() => setFormData({ ...formData, userStatus: 'inactive', userRole: 'Laboratory' })} />
                                                         <label for="laboratory" style={{ padding: '10px' }}>Laboratory</label>
-                                                        <input type="radio" id="pharmacy" name="userRole" value="Pharmacy" onChange={handleChange} />
+                                                        <input type="radio" id="pharmacy" name="userRole" value="Pharmacy" onClick={() => setFormData({ ...formData, userStatus: 'inactive', userRole: 'Pharmacy' })} />
                                                         <label for="pharmacy" style={{ padding: '10px' }}>Pharmacy</label>
                                                     </div>
                                                 </div>

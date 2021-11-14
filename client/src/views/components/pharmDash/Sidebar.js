@@ -47,7 +47,7 @@ const Sidebar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="doctor-profile-settings.html">
+                                    <Link to="/edit-profile">
                                         <i class="fas fa-user-cog"></i>
                                         <span>Profile Settings</span>
                                     </Link>

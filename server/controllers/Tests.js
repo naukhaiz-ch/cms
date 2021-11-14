@@ -29,6 +29,16 @@ export const createTest = async (req, res) => {
     }
 }
 
+export const deleteTest = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No test with id: ${id}`)
+
+    await Test.findByIdAndRemove(id)
+
+    res.json({ message: "Test deleted successfully." })
+}
+
 export const changeTestStatus = async (req, res) => {
     const { id } = req.params
 

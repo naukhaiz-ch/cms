@@ -62,9 +62,11 @@ const Appointments = () => {
                                                 />
                                             </a>
                                             <div class="profile-det-info">
-                                                <h3><a href="patient-profile.html">{users.map((user) => (
-                                                    user._id === appointment.patientId && (user.name)
-                                                ))}</a></h3>
+                                                <h3><a href="patient-profile.html">
+                                                    {users.map((user) => (
+                                                        user._id === appointment.patientId && (user.name)
+                                                    ))}
+                                                </a></h3>
                                                 <div class="patient-details">
                                                     <h5>
                                                         <i class="far fa-clock"></i>{appointment.appointmentTime}
@@ -101,12 +103,7 @@ const Appointments = () => {
                                                     <i class="fas fa-check"></i> Accept
                                                 </button>
                                             }
-
                                         </div>
-                                        <div>
-
-                                        </div>
-
                                         <div>
                                             <div class="modal fade custom-modal" id={`appt_details${appointment._id}`}>
                                                 <div class="modal-dialog modal-dialog-centered">

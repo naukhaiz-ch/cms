@@ -1,4 +1,4 @@
-import { FETCH_ALL_TESTS, CREATE_TEST, UPDATE_TEST } from '../constants/actionTypes';
+import { FETCH_ALL_TESTS, CREATE_TEST, UPDATE_TEST, DELETE_TEST } from '../constants/actionTypes';
 import * as api from '../api/Index';
 
 
@@ -44,6 +44,18 @@ export const updateTest = (id, test) => async (dispatch) => {
         dispatch({
             type: UPDATE_TEST,
             payload: data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteTest = (id) => async (dispatch) => {
+    try {
+        await api.deleteTest(id)
+        dispatch({
+            type: DELETE_TEST,
+            payload: id
         })
     } catch (error) {
         console.log(error)
